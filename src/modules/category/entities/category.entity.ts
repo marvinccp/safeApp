@@ -20,7 +20,7 @@ export class Category extends Model<Category> {
   name: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: true,
   })
   description?: string;
