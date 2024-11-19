@@ -1,14 +1,13 @@
-import { 
-  Column, 
-  DataType, 
-  Model, 
-  Table, 
-  HasMany, 
-  HasOne 
+import {
+  Column,
+  DataType,
+  Model,
+  Table,
+  HasMany,
+  HasOne,
 } from 'sequelize-typescript';
 import { RiskProfile } from '../../risk-profile/entities/risk-profile.entity';
 import { Feedback } from '../../feedback/entities/feedback.entity';
-
 
 @Table({ tableName: 'users', timestamps: true })
 export class User extends Model<User> {
@@ -35,10 +34,9 @@ export class User extends Model<User> {
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
-    defaultValue: false, 
+    defaultValue: false,
   })
   affiliate: boolean;
-
 
   @Column({
     type: DataType.STRING,

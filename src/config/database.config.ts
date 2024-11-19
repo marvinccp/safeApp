@@ -1,5 +1,5 @@
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
-require('dotenv').config(); 
+require('dotenv').config();
 
 export const safeDatabaseConfig: SequelizeModuleOptions = {
   dialect: 'postgres',
@@ -10,4 +10,10 @@ export const safeDatabaseConfig: SequelizeModuleOptions = {
   database: process.env.DB_NAME,
   autoLoadModels: true,
   synchronize: true,
+  pool: {
+    max: 10,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
 };

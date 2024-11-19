@@ -1,19 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProtocolExerciseDto } from './dto/create-protocol-exercise.dto';
 import { UpdateProtocolExerciseDto } from './dto/update-protocol-exercise.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { ProtocolExercise } from './entities/protocol-exercise.entity';
 
 @Injectable()
 export class ProtocolExerciseService {
-  create(createProtocolExerciseDto: CreateProtocolExerciseDto) {
-    return 'This action adds a new protocolExercise';
+  constructor(
+    @InjectModel(ProtocolExercise)
+    private protocolExerciseModel: typeof ProtocolExercise,
+  ) {}
+  create(bodyDataCreate: CreateProtocolExerciseDto) {
+    const { protocolId, exerciseIds } = bodyDataCreate;
+
+    const protocolExercises = exerciseIds.map((exerciseId) => ({
+      protocolId,
+      exerciseId,
+    }));
+
+    return this.protocolExerciseModel.bulkCreate(protocolExercises);
   }
 
   findAll() {
-    return `This action returns all protocolExercise`;
+    const protocolExerciseInfo = this.protocolExerciseModel.findAll();
+    console.log(protocolExerciseInfo);
+    return protocolExerciseInfo;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} protocolExercise`;
+    const protocolExerciseDetail = this.protocolExerciseModel.findByPk(id)
+    return protocolExerciseDetail
   }
 
   update(id: number, updateProtocolExerciseDto: UpdateProtocolExerciseDto) {

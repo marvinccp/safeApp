@@ -3,7 +3,7 @@ import { ProtocolExerciseService } from './protocol-exercise.service';
 import { CreateProtocolExerciseDto } from './dto/create-protocol-exercise.dto';
 import { UpdateProtocolExerciseDto } from './dto/update-protocol-exercise.dto';
 
-@Controller('protocol-exercise')
+@Controller('safe/protocol-exercise')
 export class ProtocolExerciseController {
   constructor(private readonly protocolExerciseService: ProtocolExerciseService) {}
 

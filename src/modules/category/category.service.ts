@@ -3,6 +3,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { Exercise } from '../exercise/entities/exercise.entity';
 
 @Injectable()
 export class CategoryService {
@@ -16,7 +17,11 @@ export class CategoryService {
   }
 
   async findAll(): Promise<Category[]> {
-    return this.categoryModel.findAll();
+    return this.categoryModel.findAll({
+      include:{
+        model:Exercise
+      }
+    });
   }
 
   async findOne(id: string): Promise<Category> {

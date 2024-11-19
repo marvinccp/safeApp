@@ -1,10 +1,13 @@
-import { 
-  Column, 
-  DataType, 
-  Model, 
-  Table, 
-  ForeignKey, 
-  BelongsTo } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Model,
+  Table,
+  ForeignKey,
+  BelongsTo,
+  BeforeCreate,
+  BeforeUpdate,
+} from 'sequelize-typescript';
 import { User } from '../../user/entities/user.entity';
 
 export enum RiskLevel {
@@ -35,6 +38,13 @@ export class RiskProfile extends Model<RiskProfile> {
   weight: number;
 
   @Column({
+    type: DataType.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,
+  })
+  cardiovascularDisease: boolean;
+
+  @Column({
     type: DataType.FLOAT,
     allowNull: false,
   })
@@ -53,6 +63,10 @@ export class RiskProfile extends Model<RiskProfile> {
   })
   userId: string;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   user: User;
+
 }

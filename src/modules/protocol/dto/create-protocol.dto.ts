@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 export class CreateProtocolDto {
+
   @IsNotEmpty()
   @IsString()
   readonly name: string;
@@ -8,4 +9,5 @@ export class CreateProtocolDto {
   @IsString()
   @IsOptional()
   readonly description?: string;
+  
 }
